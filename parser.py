@@ -1,3 +1,4 @@
+# parser for https://ninjasushi.com.ua/
 import requests
 from bs4 import BeautifulSoup
 
