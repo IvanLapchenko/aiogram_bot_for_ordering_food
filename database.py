@@ -25,7 +25,20 @@ def add_parsed_data_to_database(sushi_data: list, table_name):
     connection.commit()
 
 
+async def get_all_items_for_category(category):
+    try:
+        return cursor.execute(f'SELECT * FROM {category}').fetchall()
+    except Exception as e:
+        print(e)
+
+
+def is_user_registered(tg_id):
+    return bool(cursor.execute(f'SELECT id FROM users WHERE id = {tg_id}').fetchall())
+
+
+
 # should be commented, otherwise duplicate tables will be created
+# create_table('users', 'id INTEGER, name VARCHAR(120), phone CHAR(20)')
 # create_table('sets', 'name VARCHAR(256), weight CHAR(10), price CHAR(10), image VARCHAR(120)')
 # create_table('sushi', 'name VARCHAR(256), weight CHAR(10), price CHAR(10), image VARCHAR(120)')
 # create_table('rolls', 'name VARCHAR(256), weight CHAR(10), price CHAR(10), image VARCHAR(120)')
@@ -44,6 +57,5 @@ def add_parsed_data_to_database(sushi_data: list, table_name):
 # just checks if table exists
 # print(cursor.execute('SELECT * FROM sushi').fetchall())
 # print(cursor.execute('SELECT * FROM rolls').fetchall())
-
 
 
